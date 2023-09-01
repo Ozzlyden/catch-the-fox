@@ -16,7 +16,7 @@ public class Enemy1 extends Entity{
 	
 	public boolean isDamaged = false;
 	public int damageFrames = 8, damageCurrent = 0;
-	private int frames = 0, maxFrames = 15, index = 0, maxIndex = 1;
+	private int frames = 0, maxFrames = 15, index = 0, maxIndex = 3;
 	
 	public double dx, dy;
 	
@@ -27,11 +27,13 @@ public class Enemy1 extends Entity{
 		super(x, y, width, height, speed, null);
 		// TODO Auto-generated constructor stub
 		
-		ENEMY1 = new BufferedImage[2];
+		ENEMY1 = new BufferedImage[5];
 		ENEMY1_FEEDBACK = new BufferedImage[2];
 			
 		ENEMY1[0] = Game.spritesheet.getSprite(0, 16, 16, 16);
 		ENEMY1[1] = Game.spritesheet.getSprite(16, 16, 16, 16);
+		ENEMY1[2] = Game.spritesheet.getSprite(32, 16, 16, 16);
+		ENEMY1[3] = Game.spritesheet.getSprite(48, 16, 16, 16);
 		ENEMY1_FEEDBACK[0] = Game.spritesheet.getSprite(0, 96, 16, 16);
 		
 	}

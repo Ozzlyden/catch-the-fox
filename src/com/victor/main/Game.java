@@ -161,7 +161,7 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 		// Chicken House
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		g.setColor(Color.black);
-		g.fillOval(WIDTH/2 - 35, HEIGHT/2 - 35, 70, 70);
+		g.fillOval(WIDTH/2 - 20, HEIGHT/2 - 20, 40, 40);
 		
 		Collections.sort(entities, Entity.nodeSorter);	//Organizar camadas de render
 		for(int i = 0; i < entities.size(); i++) {
