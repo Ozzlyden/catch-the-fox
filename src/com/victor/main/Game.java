@@ -24,6 +24,7 @@ import javax.swing.JFrame;
 
 import com.victor.entities.Enemy1;
 import com.victor.entities.Entity;
+import com.victor.entities.House;
 import com.victor.entities.Player;
 import com.victor.graficos.Spritesheet;
 import com.victor.graficos.UI;
@@ -52,6 +53,7 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 	public EnemySpawn enemySpawn;
 	
 	public UI ui;	
+	public House house;
 	
 	
 	public Game() {
@@ -65,7 +67,7 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 		//setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize()));
 		
 		//JANELA
-		setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		setPreferredSize(new Dimension(WIDTH/**SCALE*/, HEIGHT/**SCALE*/));
 		intFrame();
 		
 		image = new BufferedImage(WIDTH,HEIGHT ,BufferedImage.TYPE_INT_RGB);
@@ -76,9 +78,10 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 		//enemies1 = new ArrayList<Enemy1>();
 		
 		//INICIALIZANDO OBJETOS
-		player = new Player((Game.WIDTH / 2) - 16 , Game.HEIGHT - 16, 16, 16, 1.3, Entity.PLAYER_SPRITE[0]);
+		player = new Player(-16 , -16, 16, 16, 1.3, Entity.PLAYER_SPRITE[0]);
 		world = new World("/map.png");
 		ui = new UI();
+		house = new House(Game.WIDTH/2, Game.HEIGHT/2, 16, 16, 0, Entity.HOUSE);
 		enemySpawn = new EnemySpawn();
 		
 		entities.add(player);
@@ -138,6 +141,7 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 		}
 		enemySpawn.tick();
 		ui.tick();
+		house.tick();
 	}
 	
 	
@@ -161,7 +165,7 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 		// Chicken House
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		g.setColor(Color.black);
-		g.fillOval(WIDTH/2 - 20, HEIGHT/2 - 20, 40, 40);
+		g.fillOval(WIDTH/2, HEIGHT/2, 40, 40);
 		
 		Collections.sort(entities, Entity.nodeSorter);	//Organizar camadas de render
 		for(int i = 0; i < entities.size(); i++) {
@@ -172,12 +176,13 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener, 
 		g.dispose();
 		g = bs.getDrawGraphics();
 		
-		g.drawImage(image, 0, 0, WIDTH, HEIGHT, null);	//modo janela
+		g.drawImage(image, 0, 0, WIDTH/**SCALE*/, HEIGHT/**SCALE*/, null);	//modo janela
 		
 		//fullscreen 
 		//g.drawImage(image, 0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height, null); 
 		
 		ui.render(g);
+		house.render(g);
 		bs.show();	
 	}
 

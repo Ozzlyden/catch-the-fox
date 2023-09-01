@@ -18,7 +18,7 @@ public class Enemy1 extends Entity{
 	public int damageFrames = 8, damageCurrent = 0;
 	private int frames = 0, maxFrames = 15, index = 0, maxIndex = 3;
 	
-	public double dx, dy;
+	public double dx, dy, spd;
 	
 	public BufferedImage[] ENEMY1;
 	public BufferedImage[] ENEMY1_FEEDBACK;
@@ -42,10 +42,14 @@ public class Enemy1 extends Entity{
 		// CAMADA DE RENDER
 		depth = 2;
 		
-		// LOGICA DE MOVIMENTACAO		
-		x++;
-		y++;
-			
+		// LOGICA DE MOVIMENTACAO	
+		spd = 1;
+		x+= (dx * spd);
+		y+= (dy * spd);
+		double radius = Math.atan2((Game.HEIGHT/2 - 20) - y, (Game.WIDTH / 2 - 20) - x);
+		this.dx = Math.cos(radius);
+		this.dy = Math.cos(radius);
+		
 	
 		//LOGICA ANIMACAO
 		frames++;
